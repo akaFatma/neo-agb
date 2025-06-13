@@ -1,15 +1,22 @@
-"use client"
+"use client";
 
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/ui/toast"
-import { useToast } from "@/hooks/use-toast"
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
+} from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 
 export function Toaster() {
-  const { toasts } = useToast()
+  const { toasts } = useToast();
 
   return (
     <ToastProvider duration={4000}>
       {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props} className="bg-white">
+        <Toast key={id} {...props} className="">
           <div className="flex items-start gap-2">
             {props.variant === "success" && (
               <svg
@@ -84,7 +91,9 @@ export function Toaster() {
             )}
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
-              {description && <ToastDescription>{description}</ToastDescription>}
+              {description && (
+                <ToastDescription>{description}</ToastDescription>
+              )}
             </div>
           </div>
           {action}
@@ -93,5 +102,5 @@ export function Toaster() {
       ))}
       <ToastViewport />
     </ToastProvider>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { ArchiveView } from "@/components/archive-view"
+// import { ArchiveView } from "@/components/archive-view"
 
-export default function Archive() {
-  return <ArchiveView />
-}
+// export default function Archive() {
+//   return <ArchiveView />
+// }
