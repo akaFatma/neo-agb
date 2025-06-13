@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-accent: 243, 230, 138;
+  --gradient-from: 2, 61, 97;
+  --gradient-to: 4, 108, 172;
+  --button-color: 243, 230, 138;
+  --button-hover: 247, 237, 172;
+
+  --background: 255, 255, 255;
+  --foreground: 10, 10, 10;
+
+  --card: 255, 255, 255;
+  --card-foreground: 10, 10, 10;
+
+  --popover: 255, 255, 255;
+  --popover-foreground: 10, 10, 10;
+
+  --primary: 243, 230, 138;
+  --primary-foreground: 2, 61, 97;
+
+  --secondary: 240, 240, 240;
+  --secondary-foreground: 10, 10, 10;
+
+  --muted: 240, 240, 240;
+  --muted-foreground: 115, 115, 115;
+
+  --accent: 243, 230, 138;
+  --accent-foreground: 2, 61, 97;
+
+  --destructive: 255, 102, 102;
+  --destructive-foreground: 255, 255, 255;
+
+  --border: 214, 214, 214;
+  --input: 214, 214, 214;
+  --ring: 243, 230, 138;
+
+  --radius: 0.75rem;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, rgb(var(--gradient-from)), rgb(var(--gradient-to)));
+}
+
+.button-primary {
+  background-color: rgb(var(--button-color));
+  color: rgb(var(--gradient-from));
+}
+
+.button-primary:hover {
+  background-color: rgb(var(--button-hover));
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Toast animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-enter {
+  animation: slideIn 0.3s ease-out forwards;
+}
