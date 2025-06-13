@@ -29,63 +29,62 @@ export function EscalateModal({ open, onOpenChange, clientName, requestId }: Esc
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const escalationReasons = [
-    "Suspected fraud",
-    "Complex corporate structure",
-    "High-risk jurisdiction",
-    "Politically exposed person",
-    "Unusual transaction patterns",
-    "Other compliance concerns",
-  ]
-
+    "Fraude suspectée",
+    "Structure d'entreprise complexe",
+    "Juridiction à haut risque",
+    "Personne politiquement exposée",
+    "Modèles de transactions inhabituels",
+    "Autres préoccupations de conformité",
+  ];
   const handleEscalate = () => {
     if (!reason) {
       toast({
         variant: "destructive",
-        title: "Missing information",
-        description: "Please select an escalation reason.",
-      })
-      return
+        title: "Informations manquantes",
+        description: "Veuillez sélectionner un motif d'escalade.",
+      });
+      return;
     }
-
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     // Simulate API call
     setTimeout(() => {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
       toast({
-        title: "Request Escalated",
-        description: `Request for ${clientName} has been escalated to Compliance.`,
-      })
+        title: "Demande escaladée",
+        description: `La demande pour ${clientName} a été escaladée au service Conformité.`,
+      });
 
-      // Reset form and close modal
-      setReason("")
-      setComments("")
-      onOpenChange(false)
-    }, 1000)
-  }
+      // Réinitialiser le formulaire et fermer la modale
+      setReason("");
+      setComments("");
+      onOpenChange(false);
+    }, 1000);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] bg-white">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5 text-red-500" />
-            Escalate to Compliance
+            Escalader au service Conformité
           </DialogTitle>
           <DialogDescription>
-            Escalate request {requestId} for {clientName} to the Compliance team for further review.
+            Escaladez la demande {requestId} pour {clientName} au service
+            Conformité pour une révision approfondie.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <label htmlFor="reason" className="text-sm font-medium">
-              Escalation Reason
+              Motif de l'escalade
             </label>
             <Select value={reason} onValueChange={setReason}>
               <SelectTrigger id="reason">
-                <SelectValue placeholder="Select reason for escalation" />
+                <SelectValue placeholder="Sélectionnez un motif d'escalade" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 {escalationReasons.map((reason) => (
                   <SelectItem key={reason} value={reason}>
                     {reason}
@@ -96,11 +95,11 @@ export function EscalateModal({ open, onOpenChange, clientName, requestId }: Esc
           </div>
           <div className="grid gap-2">
             <label htmlFor="comments" className="text-sm font-medium">
-              Additional Comments
+              Commentaires supplémentaires
             </label>
             <Textarea
               id="comments"
-              placeholder="Provide details about why this request needs compliance review..."
+              placeholder="Fournissez des détails sur la raison de cette escalade vers la conformité..."
               value={comments}
               onChange={(e) => setComments(e.target.value)}
               className="min-h-[120px]"
@@ -109,7 +108,7 @@ export function EscalateModal({ open, onOpenChange, clientName, requestId }: Esc
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Annuler
           </Button>
           <Button
             onClick={handleEscalate}
@@ -117,10 +116,10 @@ export function EscalateModal({ open, onOpenChange, clientName, requestId }: Esc
             disabled={isSubmitting}
           >
             <Send className="h-4 w-4" />
-            {isSubmitting ? "Submitting..." : "Escalate Request"}
+            {isSubmitting ? "Envoi en cours..." : "Escalader la demande"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

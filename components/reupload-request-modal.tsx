@@ -28,19 +28,19 @@ export function ReuploadRequestModal({ open, onOpenChange, clientName, requestId
   const [additionalNotes, setAdditionalNotes] = useState("")
 
   const documents = [
-    { id: "id-card", label: "ID Card" },
-    { id: "proof-address", label: "Proof of Address" },
-    { id: "income-statement", label: "Income Statement" },
-    { id: "tax-return", label: "Tax Return" },
-    { id: "signature-sample", label: "Signature Sample" },
-  ]
+    { id: "id-card", label: "Carte d'identité" },
+    { id: "proof-address", label: "Justificatif de domicile" },
+    { id: "income-statement", label: "Relevé de revenus" },
+    { id: "tax-return", label: "Déclaration fiscale" },
+    { id: "signature-sample", label: "Exemple de signature" },
+  ];
 
   const predefinedMessages = [
-    "Please ensure the document is clearly visible and all corners are shown.",
-    "The document appears to be expired. Please provide a valid document.",
-    "The information on the document doesn't match your application details.",
-    "The document quality is too low. Please rescan at a higher resolution.",
-  ]
+    "Veuillez vous assurer que le document est clairement visible et que tous les coins sont affichés.",
+    "Le document semble expiré. Veuillez fournir un document valide.",
+    "Les informations sur le document ne correspondent pas à votre demande.",
+    "La qualité du document est trop faible. Veuillez le scanner à une meilleure résolution.",
+  ];
 
   const handleSendRequest = () => {
     if (selectedDocuments.length === 0) {
@@ -82,16 +82,19 @@ export function ReuploadRequestModal({ open, onOpenChange, clientName, requestId
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] bg-white">
         <DialogHeader>
-          <DialogTitle>Request Document Re-upload</DialogTitle>
+          <DialogTitle>Demande de renvoi de document</DialogTitle>
           <DialogDescription>
-            Request {clientName} to re-upload documents for request {requestId}.
+            Demander à {clientName} de renvoyer des documents pour la demande{" "}
+            {requestId}.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div>
-            <h3 className="mb-3 text-sm font-medium">Select Documents</h3>
+            <h3 className="mb-3 text-sm font-medium">
+              selectionner un document
+            </h3>
             <div className="space-y-2">
               {documents.map((document) => (
                 <div key={document.id} className="flex items-center space-x-2">
@@ -111,7 +114,7 @@ export function ReuploadRequestModal({ open, onOpenChange, clientName, requestId
             </div>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-medium">Message Templates</h3>
+            <h3 className="mb-3 text-sm font-medium">Modèles de message</h3>
             <div className="flex flex-wrap gap-2">
               {predefinedMessages.map((message, index) => (
                 <Button
@@ -127,25 +130,25 @@ export function ReuploadRequestModal({ open, onOpenChange, clientName, requestId
             </div>
           </div>
           <div>
-            <h3 className="mb-2 text-sm font-medium">Additional Notes</h3>
+            <h3 className="mb-2 text-sm font-medium">Notes supplémentaires</h3>
             <Textarea
               value={additionalNotes}
               onChange={(e) => setAdditionalNotes(e.target.value)}
-              placeholder="Add any specific instructions or requirements..."
+              placeholder="Ajoutez des instructions ou exigences spécifiques... "
               className="min-h-[100px]"
             />
           </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Annuler
           </Button>
           <Button onClick={handleSendRequest} className="gap-1">
             <Send className="h-4 w-4" />
-            Send Request
+            Envoyer requete 
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

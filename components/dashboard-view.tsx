@@ -16,103 +16,109 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 // Mock data for the dashboard
 const summaryData = [
   {
-    title: "Total Requests",
+    title: "Requêtes totales",
     value: 124,
     icon: FileText,
     color: "bg-blue-100 text-blue-700",
   },
   {
-    title: "Anomalies",
+    title: "Anomalies détectées",
     value: 18,
     icon: AlertTriangle,
     color: "bg-amber-100 text-amber-700",
   },
   {
-    title: "Interviews",
+    title: "Entrentiens",
     value: 32,
     icon: Calendar,
     color: "bg-purple-100 text-purple-700",
   },
   {
-    title: "Validated",
+    title: "Validées",
     value: 74,
     icon: CheckCircle,
     color: "bg-green-100 text-green-700",
   },
-]
+];
+
 
 const requestsData = [
   {
     id: "REQ-2023-001",
     clientName: "John Smith",
-    type: "Individual",
-    status: "New",
+    type: "particulier",
+    status: "Nouveau",
     date: "2023-06-12",
-    anomalies: ["Missing document", "Address mismatch"],
-    priority: "high",
-    anomalyDetails: "The address on the ID doesn't match the application form.",
+    anomalies: ["Document manquant", "Adresse non correspondante"],
+    priority: "élevée",
+    anomalyDetails:
+      "L'adresse sur la pièce d'identité ne correspond pas au formulaire de demande.",
   },
   {
     id: "REQ-2023-002",
     clientName: "Acme Corp",
-    type: "Corporate",
-    status: "Review",
+    type: "Entreprise",
+    status: "En révision",
     date: "2023-06-11",
-    anomalies: ["Signature mismatch"],
-    priority: "medium",
-    anomalyDetails: "The signature on the form doesn't match the one on the ID.",
+    anomalies: ["Signature non conforme"],
+    priority: "moyenne",
+    anomalyDetails:
+      "La signature sur le formulaire ne correspond pas à celle de la pièce d'identité.",
   },
   {
     id: "REQ-2023-003",
     clientName: "Sarah Johnson",
-    type: "Individual",
-    status: "Scheduled",
+    type: "particulier",
+    status: "Planifié",
     date: "2023-06-10",
     anomalies: [],
-    priority: "normal",
+    priority: "normale",
     anomalyDetails: "",
   },
   {
     id: "REQ-2023-004",
     clientName: "Tech Startups LLC",
     type: "Entrepreneur",
-    status: "Escalated",
+    status: "Échelonné",
     date: "2023-06-09",
-    anomalies: ["Document expiration", "Inconsistent information"],
-    priority: "high",
-    anomalyDetails: "Business registration document is expired. Owner information is inconsistent.",
+    anomalies: ["Document expiré", "Informations incohérentes"],
+    priority: "élevée",
+    anomalyDetails:
+      "Le document d'immatriculation de l'entreprise est expiré. Les informations du propriétaire sont incohérentes.",
   },
   {
     id: "REQ-2023-005",
     clientName: "Michael Brown",
-    type: "Individual",
-    status: "New",
+    type: "particulier",
+    status: "Nouveau",
     date: "2023-06-08",
-    anomalies: ["ID verification failed"],
-    priority: "high",
-    anomalyDetails: "ID verification failed. The document appears to be altered.",
+    anomalies: ["Échec de vérification d'identité"],
+    priority: "élevée",
+    anomalyDetails:
+      "La vérification d'identité a échoué. Le document semble avoir été modifié.",
   },
   {
     id: "REQ-2023-006",
     clientName: "Global Enterprises Inc",
-    type: "Corporate",
-    status: "Validated",
+    type: "Entreprise",
+    status: "Validé",
     date: "2023-06-07",
     anomalies: [],
-    priority: "normal",
+    priority: "normale",
     anomalyDetails: "",
   },
   {
     id: "REQ-2023-007",
     clientName: "Emma Wilson",
-    type: "Individual",
-    status: "Review",
+    type: "particulier",
+    status: "En révision",
     date: "2023-06-06",
-    anomalies: ["Missing document"],
-    priority: "medium",
-    anomalyDetails: "Proof of address document is missing.",
+    anomalies: ["Document manquant"],
+    priority: "moyenne",
+    anomalyDetails: "Le justificatif de domicile est manquant.",
   },
-]
+];
+
 
 const statusColors: Record<string, string> = {
   New: "bg-blue-100 text-blue-700",
@@ -157,8 +163,10 @@ export function DashboardView() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">Overview of account opening requests and their status</p>
+        <h1 className="text-3xl font-bold tracking-tight">TABLEAU DE BORD</h1>
+        <p className="text-muted-foreground">
+          Vue d’ensemble des demandes d’ouverture de compte et de leur statut.
+        </p>
       </div>
 
       {/* Summary Cards */}
@@ -166,7 +174,9 @@ export function DashboardView() {
         {summaryData.map((item, index) => (
           <Card key={index} className="shadow-custom">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {item.title}
+              </CardTitle>
               <div className={cn("p-2 rounded-full", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
@@ -174,13 +184,13 @@ export function DashboardView() {
             <CardContent>
               <div className="text-2xl font-bold">{item.value}</div>
               <p className="text-xs text-muted-foreground">
-                {item.title === "Anomalies"
-                  ? "+2 since yesterday"
-                  : item.title === "Total Requests"
-                    ? "+5 since yesterday"
-                    : item.title === "Validated"
-                      ? "+3 since yesterday"
-                      : "+1 since yesterday"}
+                {item.title === "Anomalies détectées"
+                  ? "+2 depuis hier"
+                  : item.title === "Requêtes totales"
+                  ? "+5 depuis hier"
+                  : item.title === "Validées"
+                  ? "+3 depuis hier"
+                  : "+1 depuis hier"}
               </p>
             </CardContent>
           </Card>
@@ -192,7 +202,7 @@ export function DashboardView() {
         <div className="relative flex-1">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search by client name or request ID..."
+            placeholder="recherche par le nom de client ou id de requetes"
             className="pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -202,22 +212,11 @@ export function DashboardView() {
           <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Client Type" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="Individual">Individual</SelectItem>
-            <SelectItem value="Entrepreneur">Entrepreneur</SelectItem>
+          <SelectContent className="bg-white">
+            <SelectItem value="all">tous les types</SelectItem>
+            <SelectItem value="particulier">particulier</SelectItem>
+            <SelectItem value="Entrepreneur">Entreprise</SelectItem>
             <SelectItem value="Corporate">Corporate</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={riskLevel} onValueChange={setRiskLevel}>
-          <SelectTrigger className="w-full sm:w-[180px]">
-            <SelectValue placeholder="Risk Level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Levels</SelectItem>
-            <SelectItem value="high">High Risk</SelectItem>
-            <SelectItem value="medium">Medium Risk</SelectItem>
-            <SelectItem value="low">Low Risk</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -227,7 +226,8 @@ export function DashboardView() {
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Client Requests</h2>
           <div className="text-sm text-muted-foreground">
-            Showing {filteredRequests.length} of {requestsData.length} requests
+            Affichage de {filteredRequests.length} sur {requestsData.length}{" "}
+            demandes
           </div>
         </div>
 
@@ -237,7 +237,7 @@ export function DashboardView() {
               key={request.id}
               className={cn(
                 "transition-shadow hover:shadow-md",
-                request.priority === "high" ? "border-l-4 border-l-red-500" : "",
+                request.priority === "high" ? "border-l-4 border-l-red-500" : ""
               )}
             >
               <CardContent className="p-4">
@@ -245,7 +245,10 @@ export function DashboardView() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold">{request.clientName}</h3>
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         {typeIcons[request.type]}
                         {request.type}
                       </Badge>
@@ -259,7 +262,9 @@ export function DashboardView() {
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 pt-2">
-                      <Badge className={statusColors[request.status]}>{request.status}</Badge>
+                      {/* <Badge className={statusColors[request.status]}>
+                        {request.status}
+                      </Badge> */}
                       <TooltipProvider>
                         {request.anomalies.map((anomaly, index) => (
                           <Tooltip key={index}>
@@ -281,7 +286,9 @@ export function DashboardView() {
                     </div>
                   </div>
                   <Button asChild>
-                    <Link href={`/dashboard/requests/${request.id}`}>Open Request</Link>
+                    <Link href={`/dashboard/requests/${request.id}`}>
+                      Ouvrir requete
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
@@ -293,12 +300,14 @@ export function DashboardView() {
               <div className="flex flex-col items-center gap-1 text-center">
                 <FileText className="h-10 w-10 text-muted-foreground" />
                 <h3 className="font-semibold">No requests found</h3>
-                <p className="text-sm text-muted-foreground">Try adjusting your search or filters</p>
+                <p className="text-sm text-muted-foreground">
+                  Try adjusting your search or filters
+                </p>
               </div>
             </div>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -45,8 +45,12 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="w-full shadow-custom">
-      <CardContent className="pt-6">
+    <Card className="w-full shadow-custom py-8 bg-white">
+      <CardContent>
+        <div className="flex flex-col items-center justify-center">
+          <img src="/images/logo.svg" className=" w-30 h-10 object-contain" />
+          <h1 className="text-3xl font-bold text-center py-6">Bienvenue</h1>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4">
             {error && (
@@ -67,7 +71,7 @@ export function LoginForm() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">mot de passe</Label>
               <Input
                 id="password"
                 type="password"
@@ -77,11 +81,15 @@ export function LoginForm() {
               />
             </div>
           </div>
-          <Button className="w-full mt-6" type="submit" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Login"}
+          <Button
+            className="w-full mt-6 shadow-xl"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing in..." : "se connecter"}
           </Button>
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }

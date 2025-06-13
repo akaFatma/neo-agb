@@ -9,7 +9,7 @@ export function Toaster() {
   return (
     <ToastProvider duration={4000}>
       {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props}>
+        <Toast key={id} {...props} className="bg-white">
           <div className="flex items-start gap-2">
             {props.variant === "success" && (
               <svg

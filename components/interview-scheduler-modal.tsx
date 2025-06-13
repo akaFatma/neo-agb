@@ -94,11 +94,12 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] bg-white">
         <DialogHeader>
-          <DialogTitle>Schedule Interview</DialogTitle>
+          <DialogTitle>Planifier un entretien</DialogTitle>
           <DialogDescription>
-            Schedule a video or phone interview with {clientName} for request {requestId}.
+            Planifiez un entretien vidéo ou téléphonique avec {clientName} pour
+            la demande {requestId}.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -112,10 +113,13 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
                   <Button
                     id="date"
                     variant="outline"
-                    className={cn("justify-start text-left font-normal", !date && "text-muted-foreground")}
+                    className={cn(
+                      "justify-start text-left font-normal",
+                      !date && "text-muted-foreground"
+                    )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "PPP") : "Select date"}
+                    {date ? format(date, "PPP") : "Sélectionner une date"}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
@@ -131,13 +135,13 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
             </div>
             <div className="grid gap-2">
               <label htmlFor="time" className="text-sm font-medium">
-                Time
+                Heure
               </label>
               <Select value={time} onValueChange={setTime}>
                 <SelectTrigger id="time">
-                  <SelectValue placeholder="Select time" />
+                  <SelectValue placeholder="Sélectionner une heure" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   {timeSlots.map((slot) => (
                     <SelectItem key={slot} value={slot}>
                       {slot}
@@ -149,16 +153,16 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
           </div>
           <div className="grid gap-2">
             <label htmlFor="meeting-type" className="text-sm font-medium">
-              Meeting Type
+              Type de rendez-vous
             </label>
             <Select value={meetingType} onValueChange={setMeetingType}>
               <SelectTrigger id="meeting-type">
-                <SelectValue placeholder="Select meeting type" />
+                <SelectValue placeholder="Sélectionner un type de rendez-vous" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="video">Video Call</SelectItem>
-                <SelectItem value="phone">Phone Call</SelectItem>
-                <SelectItem value="in-person">In-Person</SelectItem>
+              <SelectContent className="bg-white">
+                <SelectItem value="video">Appel vidéo</SelectItem>
+                <SelectItem value="phone">Appel téléphonique</SelectItem>
+                <SelectItem value="in-person">En présentiel</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -175,12 +179,12 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
                 onClick={toggleRecording}
               >
                 <Mic className="h-3.5 w-3.5" />
-                {isRecording ? "Stop Recording" : "Record"}
+                {isRecording ? "Arrêter l'enregistrement" : "Enregistrer"}
               </Button>
             </div>
             <Textarea
               id="notes"
-              placeholder="Add notes about the interview..."
+              placeholder="Ajouter des notes sur l'entretien..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               className="min-h-[100px]"
@@ -189,14 +193,14 @@ export function InterviewSchedulerModal({ open, onOpenChange, clientName, reques
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Annuler
           </Button>
           <Button type="button" onClick={handleSchedule} className="gap-1">
             <Send className="h-4 w-4" />
-            Schedule Interview
+            Planifier l'entretien
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

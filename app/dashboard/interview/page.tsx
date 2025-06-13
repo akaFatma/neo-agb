@@ -1,5 +1,5 @@
-import { InterviewView } from "@/components/interview-view"
+// import { InterviewView } from "@/components/interview-view"
 
-export default function Interview() {
-  return <InterviewView />
-}
+// export default function Interview() {
+//   return <InterviewView />
+// }
